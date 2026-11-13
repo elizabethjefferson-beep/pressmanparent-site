@@ -9,6 +9,20 @@
 <style>html,body{margin:0;height:100%;background:#FDF6EB}iframe{display:block;border:0;width:100%;height:100%}</style>
 </head>
 <body>
-<iframe src="https://script.google.com/macros/s/AKfycbzWUDok9HsK7uRo90mfzjWAd0WuWfZZzQLbcGVrSwn6hxi47NzJtz6mSOkdTe69zQCY/exec" title="Pressman Parent Center" allow="clipboard-write"></iframe>
+<iframe id="app" title="Pressman Parent Center" allow="clipboard-write"></iframe>
+<script>
+var EXEC = 'https://script.google.com/macros/s/AKfycbzWUDok9HsK7uRo90mfzjWAd0WuWfZZzQLbcGVrSwn6hxi47NzJtz6mSOkdTe69zQCY/exec';
+var app = document.getElementById('app');
+function load() { var h = location.hash.replace(/[^A-Za-z0-9_-]/g, ''); app.src = EXEC + (h ? '#' + h : ''); }
+load();
+window.addEventListener('hashchange', load);
+window.addEventListener('message', function (e) {
+var host = ''; try { host = new URL(e.origin).hostname; } catch (err) {}
+if (!/(^|[.])googleusercontent[.]com$/.test(host)) return;
+var p = e.data && e.data.pbtsPage; if (typeof p !== 'string' || !/^[A-Za-z0-9_-]{0,40}$/.test(p)) return;
+var want = p ? '#' + p : '';
+if (location.hash !== want) history.replaceState(null, '', location.pathname + location.search + want);
+});
+</script>
 </body>
 </html>
